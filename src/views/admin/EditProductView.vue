@@ -42,12 +42,17 @@ const submitHandler = async (data) => {
 </script>
 
 <template>
-  <div class="mt-10">
-    <Link to="products"> Volver </Link>
-    <h1 class="text-4xl my-10 font-extrabold">Editar Producto</h1>
+  <section>
+    <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <p class="text-xs font-black uppercase tracking-wide text-emerald-700">Inventario</p>
+        <h1 class="text-4xl font-black tracking-tight text-slate-950">Editar producto</h1>
+      </div>
+      <Link to="products">Volver</Link>
+    </div>
 
-    <div class="flex justify-center bg-white shadow">
-      <div class="mx-auto mt-10 p-10 w-full 2xl:w-2/4">
+    <div class="rounded-lg border border-stone-200 bg-white shadow-sm">
+      <div class="mx-auto max-w-3xl p-5 sm:p-8">
         <FormKit
           type="form"
           :value="formData"
@@ -60,19 +65,19 @@ const submitHandler = async (data) => {
             type="text"
             label="Nombre"
             name="name"
-            placeholder="Nombre de Producto"
+            placeholder="Nombre de producto"
             validation="required"
             v-model.trim="formData.name"
-            :validation-messages="{ required: 'El Nombre del Producto es Obligatorio' }"
+            :validation-messages="{ required: 'El nombre del producto es obligatorio' }"
           />
 
           <FormKit
             type="select"
-            label="Categoría"
+            label="Categoria"
             name="category"
             validation="required"
             v-model.number="formData.category"
-            :validation-messages="{ required: 'La Categoría es Obligatoria' }"
+            :validation-messages="{ required: 'La categoria es obligatoria' }"
             :options="products.categoryOptions"
           />
 
@@ -80,7 +85,7 @@ const submitHandler = async (data) => {
             type="number"
             label="Precio"
             name="price"
-            placeholder="Precio de Producto"
+            placeholder="Precio de producto"
             step="1"
             min="1"
             v-model.number="formData.price"
@@ -90,34 +95,36 @@ const submitHandler = async (data) => {
             type="number"
             label="Disponibles"
             name="availability"
-            placeholder="Productos Disponibles"
+            placeholder="Productos disponibles"
             v-model.number="formData.availability"
             step="1"
             min="0"
           />
 
-          <div v-if="isImageUploaded">
-            <p class="font-black">Imagen Nueva:</p>
-            <img :src="url" alt="Nueva imagen Producto" class="w-52" />
-          </div>
+          <div class="mb-5 rounded-lg border border-stone-200 bg-stone-50 p-4">
+            <template v-if="isImageUploaded">
+              <p class="mb-2 text-sm font-black uppercase tracking-wide text-slate-600">Imagen nueva</p>
+              <img :src="url" alt="Nueva imagen Producto" class="h-40 w-40 rounded-lg object-cover" />
+            </template>
 
-          <div v-else>
-            <p class="font-black">Imagen Actual:</p>
-            <img :src="formData.image" :alt="'Imagen de' + formData.image" class="w-52" />
+            <template v-else>
+              <p class="mb-2 text-sm font-black uppercase tracking-wide text-slate-600">Imagen actual</p>
+              <img :src="formData.image" :alt="'Imagen de ' + formData.image" class="h-40 w-40 rounded-lg object-cover" />
+            </template>
           </div>
 
           <FormKit
             type="file"
-            label="Cambiar Imagen"
+            label="Cambiar imagen"
             name="image"
             multiple="false"
             accept=".jpg"
             @change="onFileChange"
           />
 
-          <FormKit type="submit">Guardar Cambios</FormKit>
+          <FormKit type="submit">Guardar cambios</FormKit>
         </FormKit>
       </div>
     </div>
-  </div>
+  </section>
 </template>

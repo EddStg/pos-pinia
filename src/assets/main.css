@@ -1,1 +1,14 @@
 @import 'tailwindcss';
+
+@layer base {
+  body {
+    @apply bg-stone-100 text-slate-900 antialiased;
+  }
+
+  button,
+  a,
+  input,
+  select {
+    @apply transition-colors duration-200;
+  }
+}

@@ -33,12 +33,17 @@ const submitHandler = async (data) => {
 </script>
 
 <template>
-  <div class="mx-5 xl:mx-0">
-    <Link to="products"> Volver </Link>
-    <h1 class="text-4xl font-black my-10">Nuevo Producto</h1>
+  <section>
+    <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <p class="text-xs font-black uppercase tracking-wide text-emerald-700">Inventario</p>
+        <h1 class="text-4xl font-black tracking-tight text-slate-950">Nuevo producto</h1>
+      </div>
+      <Link to="products">Volver</Link>
+    </div>
 
-    <div class="flex justify-center bg-white shadow">
-      <div class="mt-10 p-10 w-full 2xl:w-2/4">
+    <div class="rounded-lg border border-stone-200 bg-white shadow-sm">
+      <div class="mx-auto max-w-3xl p-5 sm:p-8">
         <FormKit
           type="form"
           submit-label="Agregar Producto"
@@ -49,7 +54,7 @@ const submitHandler = async (data) => {
             type="text"
             label="Nombre"
             name="name"
-            placeholder="Nombre del Producto"
+            placeholder="Nombre del producto"
             validation="required"
             :validation-messages="{ required: 'El nombre del producto es obligatorio' }"
             v-model.trim="formData.name"
@@ -57,7 +62,7 @@ const submitHandler = async (data) => {
 
           <FormKit
             type="file"
-            label="Imagen Producto"
+            label="Imagen producto"
             name="image"
             validation="required"
             :validation-messages="{ required: 'La imagen del producto es obligatoria' }"
@@ -66,10 +71,9 @@ const submitHandler = async (data) => {
             v-model.trim="formData.image"
           />
 
-          <div v-if="isImageUploaded">
-            <p class="font-black">
-              <img :src="isImageUploaded" alt="Nueva imagen producto" class="w-32" />
-            </p>
+          <div v-if="isImageUploaded" class="mb-5 rounded-lg border border-stone-200 bg-stone-50 p-4">
+            <p class="mb-2 text-sm font-black uppercase tracking-wide text-slate-600">Vista previa</p>
+            <img :src="isImageUploaded" alt="Nueva imagen producto" class="h-32 w-32 rounded-lg object-cover" />
           </div>
 
           <FormKit
@@ -86,7 +90,7 @@ const submitHandler = async (data) => {
             type="number"
             label="Precio"
             name="price"
-            placeholder="Precio del Producto"
+            placeholder="Precio del producto"
             validation="required"
             :validation-messages="{ required: 'El precio del producto es obligatorio' }"
             min="1"
@@ -106,5 +110,5 @@ const submitHandler = async (data) => {
         </FormKit>
       </div>
     </div>
-  </div>
+  </section>
 </template>

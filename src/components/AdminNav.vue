@@ -4,20 +4,31 @@ import Logo from './Logo.vue'
 </script>
 
 <template>
-  <header
-    class="px-10 py-5 bg-gray-700 flex flex-col sm:flex-row items-center sm:justify-between absolute top-0 w-full z-10"
-  >
-    <div>
-      <Logo />
+  <header class="fixed top-0 z-10 w-full border-b border-slate-700 bg-slate-950 px-5 py-4 shadow-lg sm:px-8 lg:px-10">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex items-center gap-4">
+        <Logo />
+        <span class="hidden rounded-full border border-slate-700 px-3 py-1 text-xs font-black uppercase tracking-wide text-slate-400 sm:inline-flex">
+          Administracion
+        </span>
+      </div>
+      <nav class="flex flex-wrap items-center gap-2">
+        <RouterLink
+          :to="{ name: 'products' }"
+          class="rounded-lg px-4 py-2 text-sm font-black uppercase tracking-wide text-slate-200 hover:bg-slate-800"
+          active-class="bg-emerald-400 text-slate-950 hover:bg-emerald-400"
+        >
+          Productos
+        </RouterLink>
+        <RouterLink
+          :to="{ name: 'sales' }"
+          class="rounded-lg px-4 py-2 text-sm font-black uppercase tracking-wide text-slate-200 hover:bg-slate-800"
+          active-class="bg-emerald-400 text-slate-950 hover:bg-emerald-400"
+        >
+          Ventas
+        </RouterLink>
+        <Link to="shop">Ir a tienda</Link>
+      </nav>
     </div>
-    <nav class="flex flex-col sm:flex-row items-center justify-center">
-      <RouterLink :to="{ name: 'products' }" class="rounded text-white font-bold p-2">
-        Productos
-      </RouterLink>
-      <RouterLink :to="{ name: 'sales' }" class="rounded text-white font-bold p-2">
-        Ventas
-      </RouterLink>
-      <Link to="shop">Ir a tienda</Link>
-    </nav>
   </header>
 </template>

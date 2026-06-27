@@ -12,17 +12,34 @@ const { filterProducts, noResults } = storeToRefs(products)
 <template>
   <MainNav />
 
-  <main class="pt-10 lg:flex lg:h-screen lg:overflow-y-hidden">
-    <div class="lg:w-2/3 lg:h-screen lg:overflow-y-scroll py-64 lg:py-24 px-10">
-      <p v-if="noResults" class="text-center text-4xl">No hay productos</p>
+  <main class="min-h-screen bg-stone-100 pt-58 lg:flex lg:h-screen lg:overflow-hidden lg:pt-26">
+    <section class="lg:h-screen lg:w-2/3 lg:overflow-y-scroll">
+      <div class="px-5 py-6 sm:px-8 lg:px-10 lg:pb-12">
+        <div class="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p class="text-xs font-black uppercase tracking-wide text-emerald-700">Punto de venta</p>
+            <h2 class="text-3xl font-black tracking-tight text-slate-950">Catalogo</h2>
+          </div>
+          <p class="text-sm font-semibold text-slate-500">Selecciona productos para agregarlos al ticket</p>
+        </div>
 
-      <div v-else class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
-        <ProductCard v-for="product in filterProducts" :key="product.id" :product="product" />
+        <p
+          v-if="noResults"
+          class="rounded-lg border border-dashed border-stone-300 bg-white p-10 text-center text-xl font-black text-slate-500"
+        >
+          No hay productos
+        </p>
+
+        <div v-else class="grid grid-cols-1 gap-4 xl:grid-cols-2 2xl:grid-cols-3">
+          <ProductCard v-for="product in filterProducts" :key="product.id" :product="product" />
+        </div>
       </div>
-    </div>
+    </section>
 
-    <aside class="lg:w-1/3 lg:screen lg:overflow-y-scroll py-24 px-10">
-      <ShoppingCart />
+    <aside class="border-t border-stone-200 bg-stone-50 lg:h-screen lg:w-1/3 lg:overflow-y-scroll lg:border-l lg:border-t-0">
+      <div class="sticky top-0 px-5 py-6 sm:px-8 lg:px-8 lg:py-8">
+        <ShoppingCart />
+      </div>
     </aside>
   </main>
 </template>

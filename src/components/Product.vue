@@ -17,22 +17,28 @@ const isProductNotAvailable = computed(() => props.product.availability === 0)
 
 <template>
   <li
-    :class="{ 'opacity-30': isProductNotAvailable }"
-    class="flex items-center space-x-6 border border-gray-200 bg-white shadow p-6"
+    :class="{ 'opacity-40': isProductNotAvailable }"
+    class="flex items-center gap-4 rounded-lg border border-stone-200 bg-white p-4 shadow-sm hover:border-emerald-300"
   >
-    <img :src="product.image" :alt="product.name" class="h-24 w-24" />
-    <div class="space-y-2 flex-auto">
-      <h3 class="text-gray-900">{{ product.name }}</h3>
-      <p class="font-black">{{ formatCurrecy(product.price) }}</p>
-      <p>{{ product.availability }} en existencia</p>
+    <img :src="product.image" :alt="product.name" class="h-24 w-24 rounded-lg object-cover" />
+    <div class="min-w-0 flex-auto space-y-2">
+      <h3 class="truncate text-lg font-black text-slate-950">{{ product.name }}</h3>
+      <div class="flex flex-wrap items-center gap-2">
+        <p class="text-xl font-black text-slate-950">{{ formatCurrecy(product.price) }}</p>
+        <span class="rounded-full bg-stone-100 px-3 py-1 text-xs font-black text-slate-600">
+          {{ product.availability }} en existencia
+        </span>
+      </div>
     </div>
 
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-2">
       <RouterLink
         :to="{
           name: 'edit-product',
           params: { id: product.id },
         }"
+        class="rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-950"
+        aria-label="Editar"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +46,7 @@ const isProductNotAvailable = computed(() => props.product.availability === 0)
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          class="size-6 text-gray-600"
+          class="size-5"
         >
           <path
             stroke-linecap="round"
@@ -50,14 +56,14 @@ const isProductNotAvailable = computed(() => props.product.availability === 0)
         </svg>
       </RouterLink>
 
-      <button class="text-red-500" @click="products.deleteProduct(product.id)">
+      <button class="rounded-lg p-2 text-red-500 hover:bg-red-50 hover:text-red-600" @click="products.deleteProduct(product.id)" aria-label="Eliminar">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          class="size-6"
+          class="size-5"
         >
           <path
             stroke-linecap="round"

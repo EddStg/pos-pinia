@@ -11,42 +11,59 @@ const coupon = useCouponStore()
 </script>
 
 <template>
-  <p v-if="cart.isEmpty" class="text-xl text-center text-gray-900">El Carrito esta vacio</p>
+  <section class="rounded-lg border border-stone-200 bg-white p-5 shadow-sm">
+    <div class="mb-5 flex items-start justify-between gap-4 border-b border-stone-200 pb-4">
+      <div>
+        <p class="text-xs font-black uppercase tracking-wide text-emerald-700">Ticket actual</p>
+        <h2 class="text-2xl font-black tracking-tight text-slate-950">Resumen de venta</h2>
+      </div>
+      <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-black text-slate-600">
+        {{ cart.items.length }} items
+      </span>
+    </div>
 
-  <div v-else>
-    <p class="text-4xl font-bold text-gray-900">Resumen de Ventas</p>
-
-    <ul role="list" class="mt-6 divide-y divide-gray-200">
-      <ShoppingCartItem v-for="item in cart.items" :key="item.id" :item="item" />
-    </ul>
-
-    <dl class="space-y-6 border-t border-gray-200 pt-6 text-sm font-medium text-gray-500">
-      <Amount>
-        <template #label>Subtotal:</template>
-        {{ formatCurrecy(cart.subtotal) }}
-      </Amount>
-      <Amount>
-        <template #label>Impuestos:</template>
-        {{ formatCurrecy(cart.taxes) }}
-      </Amount>
-      <Amount v-if="coupon.isValidCoupon">
-        <template #label>Descuento:</template>
-        {{ formatCurrecy(coupon.discount) }}
-      </Amount>
-      <Amount>
-        <template #label>Total a pagar:</template>
-        {{ formatCurrecy(cart.total) }}
-      </Amount>
-    </dl>
-
-    <CouponForm />
-
-    <button
-      type="button"
-      class="mt-10 w-full bg-indigo-600 hover:bg-indigo-700 text-white uppercase font-bold p-3"
-      @click="cart.checkout"
+    <p
+      v-if="cart.isEmpty"
+      class="rounded-lg border border-dashed border-stone-300 bg-stone-50 p-8 text-center text-sm font-bold text-slate-500"
     >
-      Confirmar Compra
-    </button>
-  </div>
+      El carrito esta vacio
+    </p>
+
+    <div v-else>
+      <ul role="list" class="divide-y divide-stone-200">
+        <ShoppingCartItem v-for="item in cart.items" :key="item.id" :item="item" />
+      </ul>
+
+      <dl class="mt-5 space-y-1 border-t border-stone-200 pt-5 text-sm font-medium text-slate-500">
+        <Amount>
+          <template #label>Subtotal:</template>
+          {{ formatCurrecy(cart.subtotal) }}
+        </Amount>
+        <Amount>
+          <template #label>Impuestos:</template>
+          {{ formatCurrecy(cart.taxes) }}
+        </Amount>
+        <Amount v-if="coupon.isValidCoupon" class="bg-amber-50">
+          <template #label>Descuento:</template>
+          {{ formatCurrecy(coupon.discount) }}
+        </Amount>
+        <div class="mt-2 border-2 border-slate-950 rounded-lg p-3 text-white">
+          <Amount>
+            <template #label>Total a pagar:</template>
+            {{ formatCurrecy(cart.total) }}
+          </Amount>
+        </div>
+      </dl>
+
+      <CouponForm />
+
+      <button
+        type="button"
+        class="mt-6 w-full rounded-lg bg-amber-400 p-3 font-black uppercase tracking-wide text-slate-950 shadow-sm hover:bg-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-200"
+        @click="cart.checkout"
+      >
+        Confirmar compra
+      </button>
+    </div>
+  </section>
 </template>

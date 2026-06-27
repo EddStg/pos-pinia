@@ -9,28 +9,30 @@ defineProps({
 </script>
 
 <template>
-  <div class="border-t border-gray-200 space-y-6 py-6">
-    <h2 class="text-2xl font-black">Detalles Venta:</h2>
-    <p class="text-xl font-black text-gray-500">Productos Vendidos</p>
-    <ul
-      role="list"
-      class="mt-6 divide-y divide-gray-200 border-gray-200 text-sm font-medium text-gray-500"
-    >
-      <li v-for="item in sale.items" class="flex space-x-6 py-6">
+  <article class="rounded-lg border border-stone-200 bg-stone-50 p-5">
+    <div class="mb-4 flex items-center justify-between gap-4">
+      <div>
+        <h2 class="text-xl font-black text-slate-950">Detalles de venta</h2>
+        <p class="text-sm font-bold text-slate-500">Productos vendidos</p>
+      </div>
+    </div>
+
+    <ul role="list" class="divide-y divide-stone-200 text-sm font-medium text-slate-500">
+      <li v-for="item in sale.items" class="flex gap-4 py-4">
         <img
           :src="item.image"
           :alt="'Imagen de ' + item.name"
-          class="h-24 w-24 flex-none rounded-lg"
+          class="h-20 w-20 flex-none rounded-lg object-cover"
         />
-        <div class="flex-auto space-y-2">
-          <h3 class="text-gray-900">{{ item.name }}</h3>
+        <div class="flex-auto space-y-1">
+          <h3 class="font-black text-slate-950">{{ item.name }}</h3>
           <p>{{ formatCurrecy(item.price) }}</p>
           <p>Cantidad: {{ item.quantity }}</p>
         </div>
       </li>
     </ul>
 
-    <dl class="space-y-6 border-t border-gray-200 pt-6 text-sm font-medium text-gray-500">
+    <dl class="mt-4 space-y-1 border-t border-stone-200 pt-4 text-sm font-medium text-slate-500">
       <Amount>
         <template #label>Subtotal:</template>
         {{ formatCurrecy(sale.subtotal) }}
@@ -40,15 +42,17 @@ defineProps({
         {{ formatCurrecy(sale.taxes) }}
       </Amount>
 
-      <Amount v-if="sale.discount" class="bg-amber-400 p-2">
+      <Amount v-if="sale.discount" class="bg-amber-100">
         <template #label>Descuento:</template>
         {{ formatCurrecy(sale.discount) }}
       </Amount>
 
-      <Amount>
-        <template #label>Total pagado:</template>
-        {{ formatCurrecy(sale.total) }}
-      </Amount>
+      <div class="rounded-lg bg-white">
+        <Amount>
+          <template #label>Total pagado:</template>
+          {{ formatCurrecy(sale.total) }}
+        </Amount>
+      </div>
     </dl>
-  </div>
+  </article>
 </template>

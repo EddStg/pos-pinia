@@ -11,15 +11,15 @@ defineProps({
 </script>
 
 <template>
-  <li class="flex space-x-6 py-6">
-    <img :src="item.image" :alt="'imagen de ' + item.name" class="h-24 w-24 flex-none rounded-md" />
+  <li class="flex gap-4 py-4">
+    <img :src="item.image" :alt="'imagen de ' + item.name" class="h-20 w-20 flex-none rounded-lg object-cover" />
 
-    <div class="flex-auto space-y-2">
-      <h3 class="text-gray-900">{{ item.name }}</h3>
-      <p>{{ formatCurrecy(item.price) }}</p>
+    <div class="min-w-0 flex-auto space-y-2">
+      <h3 class="truncate font-black text-slate-950">{{ item.name }}</h3>
+      <p class="text-sm font-bold text-slate-500">{{ formatCurrecy(item.price) }}</p>
 
       <select
-        class="w-32 text-center p-2 rounded-lg bg-white"
+        class="w-24 rounded-lg border border-stone-300 bg-white p-2 text-center text-sm font-bold text-slate-700 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100"
         @change="cart.updateQuantity(item.id, +$event.target.value)"
         :value="item.quantity"
       >
@@ -28,14 +28,18 @@ defineProps({
     </div>
 
     <div>
-      <button type="button" @click="cart.removeItem(item.id)">
+      <button
+        type="button"
+        class="rounded-lg p-2 text-red-500 hover:bg-red-50 hover:text-red-600"
+        @click="cart.removeItem(item.id)"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          class="size-8 text-red-500"
+          class="size-5"
         >
           <path
             stroke-linecap="round"

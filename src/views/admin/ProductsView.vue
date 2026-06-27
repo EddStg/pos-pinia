@@ -7,18 +7,28 @@ const products = useProductStore()
 </script>
 
 <template>
-  <div class="px-5 lg:px-0">
-    <Link to="new-product"> Nuevo Producto </Link>
-    <h1 class="text-4xl font-black my-10">Productos</h1>
+  <section>
+    <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <p class="text-xs font-black uppercase tracking-wide text-emerald-700">Inventario</p>
+        <h1 class="text-4xl font-black tracking-tight text-slate-950">Productos</h1>
+      </div>
+      <Link to="new-product">Nuevo producto</Link>
+    </div>
 
-    <p v-if="products.noResults">No hay resultados</p>
+    <p
+      v-if="products.noResults"
+      class="rounded-lg border border-dashed border-stone-300 bg-white p-10 text-center font-bold text-slate-500"
+    >
+      No hay resultados
+    </p>
 
-    <ul v-else role="list" class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-5">
+    <ul v-else role="list" class="grid grid-cols-1 gap-4 xl:grid-cols-2">
       <Product
         v-for="product in products.productsCollection"
         :key="product.id"
         :product="product"
       />
     </ul>
-  </div>
+  </section>
 </template>
